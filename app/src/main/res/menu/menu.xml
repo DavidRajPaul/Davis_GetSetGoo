@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Settings"
+        android:visible="true"
+        app:showAsAction="never"></item>
+    <item
+        android:id="@+id/action_history"
+        android:title="Location History"></item>
+    <!--<item-->
+        <!--android:id="@+id/action_rate"-->
+        <!--android:icon="@drawable/ic_action_rate"-->
+
+        <!--android:title="Compose"-->
+        <!--app:showAsAction="ifRoom"></item>-->
+    <!--<item-->
+        <!--android:id="@+id/miCompose"-->
+        <!--android:icon="@drawable/ic_share_white_24dp"-->
+        <!--android:title="Compose"-->
+        <!--app:showAsAction="ifRoom"></item>-->
+</menu>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GetSetGo</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="app_version">1.0.0</string>
+    <!-- AdMob ad unit IDs -->
+    <string name="banner_ad">ca-app-pub-5921387885583497/7740186365</string>
+    <string name="interstitial_full_screen">ca-app-pub-5921387885583497/9216919562</string>
+    <string name="title_activity_maps2">Map</string>
+
+</resources>

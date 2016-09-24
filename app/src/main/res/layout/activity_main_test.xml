@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CoordinatorParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTextIcons"
+    tools:context="com.davidpaul.getsetgoo.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/mCollapsingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                tools:context="com.davidpaul.getsetgoo.MapsActivity" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/app_name"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/MyActionBarTheme" />
+
+            <RelativeLayout
+                android:id="@+id/revealMap"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/colorPrimary"
+                android:visibility="visible"></RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_minus17sdp"
+        android:background="@color/colorPrimaryLight"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorTextIcons">
+
+
+                        <LinearLayout
+                            android:id="@+id/lnPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <android.support.design.widget.FloatingActionButton
+                                android:layout_width="@dimen/_28sdp"
+                                android:layout_height="@dimen/_28sdp"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:elevation="0dp"
+                                android:src="@drawable/ic_action_name"
+                                app:backgroundTint="@android:color/holo_green_dark"
+                                app:fabSize="mini" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Receiver Name">
+
+                                    <android.support.v7.widget.AppCompatEditText
+                                        android:id="@+id/txtReceiverName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/_12sdp" />
+                                </android.support.design.widget.TextInputLayout>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <View style="@style/Divider" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorTextIcons">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_margin="@dimen/_10sdp"
+                                    android:elevation="0dp"
+                                    android:src="@drawable/ic_message_white_18dp"
+                                    app:backgroundTint="@android:color/holo_purple"
+                                    app:fabSize="mini" />
+
+                                <Switch
+                                    android:id="@+id/switchPhone"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:checked="false"
+                                    android:text="Recipient Number"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lnPhoneDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_48sdp"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_weight="0.3"
+                                    android:hint="Receiver Number">
+
+                                    <android.support.v7.widget.AppCompatEditText
+                                        android:id="@+id/txtReceiverNumber"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="phone"
+                                        android:textSize="@dimen/_12sdp" />
+                                </android.support.design.widget.TextInputLayout>
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:id="@+id/fabContact"
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:elevation="0dp"
+                                    android:src="@drawable/ic_contacts_white_18dp"
+                                    app:backgroundTint="@android:color/darker_gray"
+                                    app:fabSize="mini" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <View style="@style/Divider" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorTextIcons">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_margin="@dimen/_10sdp"
+                                    android:elevation="0dp"
+                                    android:src="@drawable/ic_email_white_18dp"
+                                    app:backgroundTint="@android:color/holo_red_dark"
+                                    app:fabSize="mini" />
+
+                                <Switch
+                                    android:id="@+id/switchMail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:checked="false"
+                                    android:text="Recipient Mail"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lnMailDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_48sdp"
+                                    android:layout_marginRight="@dimen/_40sdp"
+                                    android:hint="Receiver Email">
+
+                                    <android.support.v7.widget.AppCompatEditText
+                                        android:id="@+id/txtReceiverMail"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="textEmailAddress"
+                                        android:textSize="@dimen/_12sdp" />
+                                </android.support.design.widget.TextInputLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <View style="@style/Divider" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorTextIcons">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_margin="@dimen/_10sdp"
+                                    android:elevation="0dp"
+                                    android:src="@drawable/ic_access_time_white_18dp"
+                                    app:backgroundTint="@android:color/holo_orange_light"
+                                    app:fabSize="mini" />
+
+                                <Switch
+                                    android:id="@+id/switchInterval"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:checked="false"
+                                    android:text="Set Time Interval"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txtInterval"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:text="Tap to set Time Interval"
+                                android:textColor="@color/colorPrimaryText"
+                                android:textSize="@dimen/_12sdp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <View style="@style/Divider" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorTextIcons">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <android.support.design.widget.FloatingActionButton
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_margin="@dimen/_10sdp"
+                                    android:elevation="0dp"
+                                    android:src="@drawable/ic_pin_drop_white_18dp"
+                                    app:backgroundTint="@android:color/holo_blue_bright"
+                                    app:fabSize="mini" />
+
+                                <Switch
+                                    android:id="@+id/switchDestination"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_3sdp"
+                                    android:checked="false"
+                                    android:text="Set Destination"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lnDestinationDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <android.support.design.widget.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_48sdp"
+                                    android:layout_weight="0.3"
+                                    android:hint="Destination">
+
+                                    <android.support.v7.widget.AppCompatEditText
+                                        android:id="@+id/txtDestination"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="textAutoComplete|textPostalAddress"
+                                        android:textSize="@dimen/_12sdp" />
+                                </android.support.design.widget.TextInputLayout>
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <android.support.design.widget.FloatingActionButton
+                                        android:id="@+id/fabEditDestination"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:layout_marginRight="@dimen/_10sdp"
+                                        android:elevation="0dp"
+                                        android:src="@drawable/ic_edit_location_white_18dp"
+                                        app:backgroundTint="@android:color/holo_green_light"
+                                        app:fabSize="mini" />
+
+                                    <android.support.design.widget.FloatingActionButton
+                                        android:id="@+id/fabSetDestination"
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:layout_marginRight="@dimen/_10sdp"
+                                        android:elevation="0dp"
+                                        android:src="@drawable/ic_done_white_18dp"
+                                        app:backgroundTint="@android:color/holo_green_light"
+                                        app:fabSize="mini" />
+                                </FrameLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <View style="@style/Divider" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_60sdp"></LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/lnHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ScrollView
+                    android:id="@+id/scrlHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtHistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Enjoy your ride!! We will send your location with respect to the time duration that you specified to."
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="@dimen/_12sdp"
+                            android:typeface="normal" />
+
+                        <TextView
+                            android:id="@+id/txtSettingsNavigation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:text="You can always find the location history by navigating to the Location History Page"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnStartTracking"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad">
+
+        </com.google.android.gms.ads.AdView>
+
+
+        <Button
+            android:id="@+id/btnStartTracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:text="Start tracking"
+            android:textColor="@android:color/background_light"
+            android:textSize="@dimen/_14sdp"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+    <!--<FrameLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--app:layout_anchor="@+id/nestedScrollView"-->
+    <!--app:layout_anchorGravity="top|right|end">-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabExpand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:clickable="true"
+        android:elevation="@dimen/_8sdp"
+        android:src="@mipmap/ic_all_out_white_24dp"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="top|right|end" />
+    <!--</FrameLayout>-->
+</android.support.design.widget.CoordinatorLayout>
