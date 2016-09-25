@@ -6,5 +6,6 @@
     <string name="banner_ad">ca-app-pub-5921387885583497/7740186365</string>
     <string name="interstitial_full_screen">ca-app-pub-5921387885583497/9216919562</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="base64RSA" />
 
 </resources>

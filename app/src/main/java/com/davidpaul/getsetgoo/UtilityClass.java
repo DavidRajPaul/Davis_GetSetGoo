@@ -37,6 +37,7 @@ public class UtilityClass {
     static String KEY_START_NAME = "_keyStartName";
     static String KEY_START_LATITUDE = "_keyStartLat";
     static String KEY_START_LONGITUDE = "_keyStartLong";
+    public static boolean mIsPremium = false;
 
 
     UtilityClass(Context context) {

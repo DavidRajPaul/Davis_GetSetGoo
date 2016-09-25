@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         txtReceiverMail = (EditText) findViewById(R.id.txtReceiverMail);
         txtDestination = (EditText) findViewById(R.id.txtDestination);
         revealMap = (RelativeLayout) findViewById(R.id.revealMap);
-        getNameFromPreference();
+
         initializeMap();
 //        new Handler().postDelayed(new Runnable() {
 //
@@ -792,6 +792,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onResume() {
         super.onResume();
+        getNameFromPreference();
         if (mAdView != null) {
             mAdView.resume();
         }

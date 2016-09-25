@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -26,6 +28,10 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Calendar;
+
+import inapp_util.IabHelper;
+import inapp_util.IabResult;
+import inapp_util.Purchase;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -50,6 +56,9 @@ public class SettingsActivity extends AppCompatActivity {
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
     private String android_id = "";
+    static final String ITEM_SKU = "android.test.purchased";
+    private IabHelper mHelper;
+    private FrameLayout frameLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +104,20 @@ public class SettingsActivity extends AppCompatActivity {
         } else if (timeOfDay >= 21 && timeOfDay < 24) {
             UtilityClass.fn_setImageDrawable(context, toolbarImage, R.drawable.night); //"Good Night";
         }
+        String base64EncodedPublicKey = getResources().getString(R.string.base64RSA);
 
+        mHelper = new IabHelper(this, base64EncodedPublicKey);
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            @Override
+            public void onIabSetupFinished(IabResult result) {
+                if (!result.isSuccess()) {
+                    Log.d("IAB startSetup", "In-app Billing setup failed: " +
+                            result);
+                } else {
+                    Log.d("IAB startSetup", "In-app Billing is set up OK");
+                }
+            }
+        });
         lnProfile = (LinearLayout) findViewById(R.id.lnProfile);
         lnReceiverProfile = (LinearLayout) findViewById(R.id.lnReceiverProfile);
         lnSmsChar = (LinearLayout) findViewById(R.id.lnSmsChar);
@@ -109,6 +131,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         switchtrack = (Switch) findViewById(R.id.switchtrack);
         switchSmsLength = (Switch) findViewById(R.id.switchSmsLength);
+
+        frameLock = (FrameLayout) findViewById(R.id.frameLock);
 
         if (preferenceHelper.getData(UtilityClass.KEY_SMS_ADDINFO).equals("YES")) {
             switchSmsLength.setChecked(true);
@@ -124,7 +148,6 @@ public class SettingsActivity extends AppCompatActivity {
         lnPurchase.setOnClickListener(clickListener);
         lnRate.setOnClickListener(clickListener);
         lnContact.setOnClickListener(clickListener);
-
         switchtrack.setOnCheckedChangeListener(checkedChangeListener);
         switchSmsLength.setOnCheckedChangeListener(checkedChangeListener);
 
@@ -183,7 +206,24 @@ public class SettingsActivity extends AppCompatActivity {
 
                     break;
                 case R.id.lnPurchase:
+                    android.app.AlertDialog.Builder purchaseAlert = new android.app.AlertDialog.Builder(context);
+                    purchaseAlert.setCancelable(false);
+                    purchaseAlert.setTitle("Upgrade to premium Version");
+                    purchaseAlert.setMessage("The Premium Version is Ad free and also will unlock few useful features. Do you want to upgrade?");
+                    purchaseAlert.setPositiveButton("Upgrade", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            mHelper.launchPurchaseFlow(SettingsActivity.this, ITEM_SKU, 10001,
+                                    mPurchaseFinishedListener, "mypurchasetoken");
+                        }
+                    });
 
+                    // on pressing cancel button
+                    purchaseAlert.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    purchaseAlert.show();
                     break;
                 case R.id.lnRate:
 
@@ -223,6 +263,10 @@ public class SettingsActivity extends AppCompatActivity {
                         Log.e("KEY_SMS_ADDINFO-->", preferenceHelper.getData(UtilityClass.KEY_SMS_ADDINFO));
                     }
                     break;
+                case R.id.frameLock:
+                    UtilityClass.ShowAlertwithOK(context, "Features Locked!!", "Buy the premium version to unlock these features.");
+                    break;
+
                 default:
                     break;
             }
@@ -254,6 +298,24 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener
+            = new IabHelper.OnIabPurchaseFinishedListener() {
+        public void onIabPurchaseFinished(IabResult result,
+                                          Purchase purchase) {
+            if (result.isFailure()) {
+                Toast.makeText(context, "Error purchasing: " + result, Toast.LENGTH_LONG).show();
+                return;
+            } else if (purchase.getSku().equals(ITEM_SKU)) {
+//                consumeItem();
+                Toast.makeText(context, "Thank you for upgrade", Toast.LENGTH_LONG).show();
+                UtilityClass.mIsPremium = true;
+                frameLock.setVisibility(View.GONE);
+//                setUserStatus(true);
+//                upgradeDialog.dismiss();
+            }
+
+        }
+    };
 
     @Override
     public void onPause() {
@@ -269,6 +331,9 @@ public class SettingsActivity extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.resume();
         }
+        if (UtilityClass.mIsPremium) {
+            frameLock.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -276,6 +341,9 @@ public class SettingsActivity extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.destroy();
         }
+        if (mHelper != null) mHelper.dispose();
+        mHelper = null;
         super.onDestroy();
     }
+
 }
